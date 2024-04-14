@@ -103,7 +103,7 @@ thumb
 sketch
 
 # IDE VSCode
-../.vscode/
+.vscode/
 
 # Java
 target/
