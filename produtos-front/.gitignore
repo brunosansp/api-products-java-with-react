@@ -107,3 +107,7 @@ sketch
 
 # Java
 target/
+
+# Docker| PGAdmin
+data/
+.data/
