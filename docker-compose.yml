@@ -1,29 +1,44 @@
-version: '3.3'
+version: "3.7"
 services:
-  db:
-    image: postgres:latest
-    restart: always
+  # =================================================
+  # POSTGRES SERVER
+  # =================================================
+  pg-docker:
+    user: root
+    image: postgres:14-alpine
+    container_name: dev-postgresql
     environment:
-      POSTGRES_DB: 'db_produtos'
-      POSTGRES_USER: 'user'
-      POSTGRES_PASSWORD: 'password'
+      POSTGRES_DB: mydatabase
+      POSTGRES_PASSWORD: password
     ports:
-      - '5432:5432'
-    expose:
-      - '5432'
+      - 5433:5432
     volumes:
-      - my-db:/var/lib/postgresql/data
+      - ./.data/postgresql/data:/var/lib/postgresql/data
+    networks:
+      - dev-network
 
-  pgadmin:
+  # =================================================
+  # POSTGRES PGADMIN
+  # =================================================
+  pgadmin-docker:
+    user: root
     image: dpage/pgadmin4
-    restart: always
+    container_name: dev-pgadmin
     environment:
-      PGADMIN_DEFAULT_EMAIL: 'pgadmin@example.com'
-      PGADMIN_DEFAULT_PASSWORD: 'pgadminpassword'
+      PGADMIN_DEFAULT_EMAIL: me@example.com
+      PGADMIN_DEFAULT_PASSWORD: password
     ports:
-      - '5050:80'
+      - 5050:80
+    volumes:
+      - ./.data/pgadmin:/var/lib/pgadmin
     depends_on:
-      - db
+      - pg-docker
+    networks:
+      - dev-network
 
-volumes:
-  my-db:
+# =================================================
+# REDE
+# =================================================
+networks:
+  dev-network:
+    driver: bridge

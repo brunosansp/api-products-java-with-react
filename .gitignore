@@ -103,7 +103,11 @@ thumb
 sketch
 
 # IDE VSCode
-.vscode/
+../.vscode/
 
 # Java
 target/
+
+# Docker| PGAdmin
+data/
+.data/
