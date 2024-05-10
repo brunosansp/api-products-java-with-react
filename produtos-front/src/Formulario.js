@@ -1,4 +1,4 @@
-function Formulario({ botao, eventKeyboard }) {
+function Formulario({ botao, eventKeyboard, cadastrar }) {
     return (
         <form>
             <input type='text' onChange={eventKeyboard} name='nome' placeholder='Nome' className='form-control' />
@@ -7,7 +7,7 @@ function Formulario({ botao, eventKeyboard }) {
             {
                 botao
                     ?
-                    <input type='button' value='Cadastrar' className='btn btn-primary' />
+                    <input type='button' value='Cadastrar' onClick={cadastrar} className='btn btn-primary' />
                     :
                     <div>
                         <input type='button' value='Alterar' className='btn btn-warning' />
