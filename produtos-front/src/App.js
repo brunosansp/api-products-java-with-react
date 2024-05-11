@@ -52,6 +52,7 @@ function App() {
 
   const limparFormulario = () => {
     setObjProduto(produto);
+    setBtnCadastrar(true);
   };
 
   const selecionarProduto = (indice) => {
@@ -63,7 +64,13 @@ function App() {
     <div>
       {/* <p>{JSON.stringify(produtos)}</p> */}
       {/* <p>{JSON.stringify(objProduto)}</p> */}
-      <Formulario botao={btnCadastrar} eventKeyboard={aoDigitar} cadastrar={cadastrar} obj={objProduto} />
+      <Formulario
+        botao={btnCadastrar}
+        eventKeyboard={aoDigitar}
+        cadastrar={cadastrar}
+        obj={objProduto}
+        cancelar={limparFormulario} />
+
       <Tabela vetor={produtos} selecionar={selecionarProduto} />
     </div>
   );
