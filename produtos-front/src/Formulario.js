@@ -1,8 +1,19 @@
-function Formulario({ botao, eventKeyboard, cadastrar }) {
+function Formulario({ botao, eventKeyboard, cadastrar, obj }) {
     return (
         <form>
-            <input type='text' onChange={eventKeyboard} name='nome' placeholder='Nome' className='form-control' />
-            <input type='text' onChange={eventKeyboard} name='marca' placeholder='Marca' className='form-control' />
+            <input type='text'
+                value={obj.nome}
+                onChange={eventKeyboard}
+                name='nome'
+                placeholder='Nome'
+                className='form-control' />
+
+            <input type='text'
+                value={obj.marca}
+                onChange={eventKeyboard}
+                name='marca'
+                placeholder='Marca'
+                className='form-control' />
 
             {
                 botao
