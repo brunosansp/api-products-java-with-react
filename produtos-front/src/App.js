@@ -50,6 +50,45 @@ function App() {
       });
   };
 
+  const alterar = () => {
+    fetch("http://localhost:8080/alterar",
+      {
+        method: 'put',
+        body: JSON.stringify(objProduto),
+        headers: {
+          'Content-type': 'application/json',
+          'Accept': 'application/json'
+        }
+      }
+    )
+      .then(retorno => retorno.json())
+      .then(retorno_convertido => {
+        // console.log(retorno_convertido);
+        if (retorno_convertido.mensagem !== undefined) {
+          alert(retorno_convertido.mensagem);
+        } else {
+          alert("Produto alterado com sucesso!");
+
+          // cópia do vetor de produtos
+          let vetorTemp = [...produtos];
+
+          // índice a ser excluído
+          const indice = vetorTemp.findIndex((produto) => {
+            return produto.codigo === objProduto.codigo;
+          });
+
+          // alterar produto do vetorTemp
+          vetorTemp[indice] = objProduto;
+
+          // atualizar o vetor de produtos
+          setProdutos(vetorTemp);
+
+          // limpar o formulário
+          limparFormulario();
+        }
+      });
+  };
+
   const remover = () => {
     fetch("http://localhost:8080/remover/" + objProduto.codigo, {
       method: 'delete',
@@ -104,7 +143,8 @@ function App() {
         cadastrar={cadastrar}
         obj={objProduto}
         cancelar={limparFormulario}
-        remover={remover} />
+        remover={remover}
+        alterar={alterar} />
 
       <Tabela vetor={produtos} selecionar={selecionarProduto} />
     </div>
